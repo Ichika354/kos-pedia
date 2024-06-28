@@ -16,8 +16,8 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        $pembayarans = Pembayaran::all();
-        return view('pembayaran.data-pembayaran', compact('pembayarans'));
+        $pembayaran = Pembayaran::all();
+        return view('admin.data-pembayaran', compact('pembayaran'));
     }
 
     /**
@@ -60,7 +60,7 @@ class PembayaranController extends Controller
             'pemesanan_id' => $request->pemesanan_id,
             'tanggal_pembayaran' => now(),
             'upload_bukti_pembayaran' => $imageName,
-            'status_pembayaran' => 'pending',
+            'status_pembayaran' => 'berhasil',
         ]);
 
         // Mengurangi jumlah kamar pada datakos

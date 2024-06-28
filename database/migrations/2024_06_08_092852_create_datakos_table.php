@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('datakos', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('pemilik_kos_id')->unsigned();
             $table->string('nama');
             $table->string('lokasi');
             $table->integer('harga');
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->string('notlp');
             $table->string('foto')->nullable();
             $table->timestamps();
+
+            $table->foreign('pemilik_kos_id')->references('id')->on('pemilik_kos');
         });
     }
 

@@ -64,12 +64,12 @@ Route::get('/beranda', function () {
 Route::get('/datakos', function () {
     $datakos = Datakos::all();
     $datapemilik = PemilikKos::all();
-    return view('datakos.table-kos', compact('datakos', 'datapemilik'));
+    return view('admin.data-kos', compact('datakos', 'datapemilik'));
 })->name('datakos');
 
-Route::get('/datauser', [RegisteredUserController::class, 'index'])->name('datauser');
+Route::get('/datauser', [AdminController::class, 'index'])->name('datauser');
 
-Route::get('/datapemilik', [RegisteredPemilikController::class, 'index'])
+Route::get('/datapemilik', [AdminController::class, 'pemilik'])
     ->name('datapemilik');
 
 Route::get('/pemilik-kos/dashboard', function () {
@@ -77,7 +77,7 @@ Route::get('/pemilik-kos/dashboard', function () {
 })->name('pemilik.dashboard');
 Route::get('/pemilik-kos/datakos', [PemilikKosController::class, 'datakospemilik'])->name('pemilik.datakos');
 Route::get('/pemilik-kos/pemesanan', [PemesananController::class, 'pesanan'])->name('pemilik.pemesanan');
-Route::get('/pemilik-kos/pesanan', [PemilikKosController::class, 'pesanan'])->name('pemilik.user');
+Route::get('/pemilik-kos/pesanan', [PemilikKosController::class, 'pemesan'])->name('pemilik.user');
 Route::get('/pemilik-kos/pembayaran', [PemilikKosController::class, 'pembayaran'])->name('pemilik.pembayaran');
 
 
@@ -116,7 +116,7 @@ Route::get('/data-user', function () {
 
 //PembayaranController
 Route::resource('pembayarans', PembayaranController::class);
-Route::get('/pembayaran', [PembayaranController::class, 'index']);
+Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.show');
 
 // PemesananController
 Route::resource('pemesanans', PemesananController::class);
