@@ -20,6 +20,7 @@ class Datakos extends Model
         'notlp',
         'foto',
         'pemilik_kos_id',
+        'status'
     ];
 
     public function pemilikkos()

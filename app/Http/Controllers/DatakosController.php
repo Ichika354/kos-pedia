@@ -45,6 +45,9 @@ class DatakosController extends Controller
         $dataKos->deskripsi = $validated['deskripsi'];
         $dataKos->notlp = PemilikKos::findOrFail(Auth::guard('pemilik_kos')->user()->id)->no_hp;
         $dataKos->pemilik_kos_id = Auth::guard('pemilik_kos')->user()->id;
+        $dataKos->status = 'pending';
+
+        // dd($request->all());
 
         // Proses upload dan penyimpanan foto
         if ($request->hasFile('foto')) {
@@ -143,5 +146,18 @@ class DatakosController extends Controller
             ->get();
 
         return view('datakos.search', compact('results'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:Pending,Setuju,Tidak setuju',
+        ]);
+
+        $kos = Datakos::findOrFail($id);
+        $kos->status = $request->status;
+        $kos->save();
+
+        return redirect()->route('datakos')->with('status', 'Status kos berhasil diperbarui.');
     }
 }

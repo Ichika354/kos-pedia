@@ -41,17 +41,15 @@ Route::get('/search', [DatakosController::class, 'search'])->name('search');
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('Login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
+
 Route::get('/', function () {
-    $datakos = Datakos::all();
-    $user = User::all();
-    $datapemilik = PemilikKos::all();
-    $count = Datakos::count();
-    $countuser = User::count();
-    $countpemilik = PemilikKos::count();
-    return view('beranda', compact('datakos', 'count', 'countuser', 'countpemilik'));
+    $datakos = Datakos::where('status', 'Setuju')->get();
+    return view('beranda', compact('datakos'));
 })->name('beranda');
 
-Route::get('/beranda', function () {
+
+
+Route::get('/beranda-admin', function () {
     $datakos = Datakos::all();
     $user = User::all();
     $datapemilik = PemilikKos::all();
@@ -59,13 +57,16 @@ Route::get('/beranda', function () {
     $countuser = User::count();
     $countpemilik = PemilikKos::count();
     return view('beranda-admin', compact('count', 'countuser', 'countpemilik'));
-})->middleware(['auth', 'verified'])->name('beranda-admin');
+})->name('beranda-admin');
 
 Route::get('/datakos', function () {
     $datakos = Datakos::all();
     $datapemilik = PemilikKos::all();
     return view('admin.data-kos', compact('datakos', 'datapemilik'));
 })->name('datakos');
+
+Route::put('/kos/{id}/status', [DatakosController::class, 'updateStatus'])->name('kos.updateStatus');
+
 
 Route::get('/datauser', [AdminController::class, 'index'])->name('datauser');
 

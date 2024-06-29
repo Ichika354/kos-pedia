@@ -13,14 +13,14 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item {{ request()->routeIs('beranda') ? 'active open' : '' }}">
+        <li class="menu-item {{ request()->routeIs('beranda-admin') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('beranda') ? 'active' : '' }}">
-                    <a href="{{ route('beranda') }}" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('beranda-admin') ? 'active' : '' }}">
+                    <a href="{{ route('beranda-admin') }}" class="menu-link">
                         <div data-i18n="CRM">All Data</div>
                     </a>
                 </li>
