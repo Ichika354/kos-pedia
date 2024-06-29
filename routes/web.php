@@ -91,7 +91,7 @@ Route::get('/pemilik-kos/dashboard', function () {
     $jumlahPembayaran = Pembayaran::whereHas('pemesanan', function ($query) use ($pemilikKos) {
         $query->where('pemilik_kos_id', $pemilikKos->id);
     })->count();
-    return view('pemilik_kos.dashboard',compact('jumlahUserPesan', 'jumlahPemesanan', 'jumlahPembayaran'));
+    return view('pemilik_kos.dashboard', compact('jumlahUserPesan', 'jumlahPemesanan', 'jumlahPembayaran'));
 })->name('pemilik.dashboard');
 Route::get('/pemilik-kos/datakos', [PemilikKosController::class, 'datakospemilik'])->name('pemilik.datakos');
 Route::get('/pemilik-kos/pemesanan', [PemesananController::class, 'pesanan'])->name('pemilik.pemesanan');
@@ -165,10 +165,12 @@ Route::get('/pemesanan/pesan/{datakos_id}', [PemesananController::class, 'pesan'
 
 Route::get('/pemesanans', [PemesananController::class, 'index'])->name('pemesanans.index');
 
+// Route
 Route::get('/pemesanan/upload-bukti/{id}', function ($id) {
-    $pemesanan = Pemesanan::findOrFail($id);
+    $pemesanan = Pemesanan::with('kos')->findOrFail($id);
     return view('pemesanan.upload-bukti', compact('pemesanan'));
 })->name('upload.bukti');
+
 
 Route::get('/pemesanan/card-welcome', function () {
     $datakos = Datakos::all();

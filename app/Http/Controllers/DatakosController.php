@@ -32,6 +32,7 @@ class DatakosController extends Controller
             'jumlah_kamar' => 'required|integer',
             'tipekos' => 'required|string|max:50',
             'deskripsi' => 'required|string',
+            'nomor_rekening' => 'required|integer',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Pastikan foto adalah wajib
         ]);
 
@@ -43,6 +44,7 @@ class DatakosController extends Controller
         $dataKos->jumlah_kamar = $validated['jumlah_kamar'];
         $dataKos->tipekos = $validated['tipekos'];
         $dataKos->deskripsi = $validated['deskripsi'];
+        $dataKos->nomor_rekening = $validated['nomor_rekening'];
         $dataKos->notlp = PemilikKos::findOrFail(Auth::guard('pemilik_kos')->user()->id)->no_hp;
         $dataKos->pemilik_kos_id = Auth::guard('pemilik_kos')->user()->id;
         $dataKos->status = 'pending';

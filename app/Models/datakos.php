@@ -19,6 +19,7 @@ class Datakos extends Model
         'deskripsi',
         'notlp',
         'foto',
+        'nomor_rekening',
         'pemilik_kos_id',
         'status'
     ];

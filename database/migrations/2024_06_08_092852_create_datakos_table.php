@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('tipekos', ['pria', 'wanita', 'campuran']);
             $table->text('deskripsi');
             $table->string('notlp');
+            $table->integer('nomor_rekening');
             $table->string('foto')->nullable();
             $table->enum('status', ['Setuju', 'Pending', 'Tidak setuju']);
             $table->timestamps();
