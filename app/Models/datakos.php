@@ -27,4 +27,9 @@ class Datakos extends Model
     {
         return $this->belongsTo(PemilikKos::class, 'pemilik_kos_id');
     }
+
+    public function pemesanan()
+    {
+        return $this->hasMany(Pemesanan::class, 'id_kos');
+    }
 }

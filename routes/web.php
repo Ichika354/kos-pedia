@@ -18,7 +18,9 @@ use App\Http\Controllers\Auth\RegisteredPemilikController;
 use App\Http\Controllers\PemilikKosController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
+use App\Models\Pembayaran;
 use App\Models\Pemesanan;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +76,22 @@ Route::get('/datapemilik', [AdminController::class, 'pemilik'])
     ->name('datapemilik');
 
 Route::get('/pemilik-kos/dashboard', function () {
-    return view('pemilik_kos.dashboard');
+    $pemilikKos = Auth::guard('pemilik_kos')->user();
+
+    // Jumlah user yang melakukan pesanan pada kos yang dimiliki pemilik kos yang login
+    $jumlahUserPesan = Pemesanan::where('pemilik_kos_id', $pemilikKos->id)
+        ->distinct('user_id')
+        ->count('user_id');
+
+    // Jumlah pemesanan yang dilakukan user pada kos yang dimiliki pemilik kos yang login
+    $jumlahPemesanan = Pemesanan::where('pemilik_kos_id', $pemilikKos->id)
+        ->count();
+
+    // Jumlah pembayaran yang dilakukan user pada kos yang dimiliki pemilik kos yang login
+    $jumlahPembayaran = Pembayaran::whereHas('pemesanan', function ($query) use ($pemilikKos) {
+        $query->where('pemilik_kos_id', $pemilikKos->id);
+    })->count();
+    return view('pemilik_kos.dashboard',compact('jumlahUserPesan', 'jumlahPemesanan', 'jumlahPembayaran'));
 })->name('pemilik.dashboard');
 Route::get('/pemilik-kos/datakos', [PemilikKosController::class, 'datakospemilik'])->name('pemilik.datakos');
 Route::get('/pemilik-kos/pemesanan', [PemesananController::class, 'pesanan'])->name('pemilik.pemesanan');
