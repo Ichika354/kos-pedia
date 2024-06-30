@@ -42,6 +42,6 @@ class Pemesanan extends Model
 
     public function datakos()
     {
-        return $this->hasMany(Datakos::class, 'id_kos');
+        return $this->belongsTo(Datakos::class, 'id_kos');
     }
 }

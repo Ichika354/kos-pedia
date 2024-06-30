@@ -164,8 +164,8 @@ Route::get('/pemesanan/pesan/{datakos_id}', [PemesananController::class, 'pesan'
 Route::get('/pemesanans', [PemesananController::class, 'index'])->name('pemesanans.index');
 
 // Route
-Route::get('/pemesanan/upload-bukti/{id}', function ($id) {
-    $pemesanan = Pemesanan::with('datakos')->findOrFail($id);
+Route::get('/pemesanan/upload-bukti/{id}', function ($id_kos) {
+    $pemesanan = Pemesanan::with('datakos')->findOrFail($id_kos);
     return view('pemesanan.upload-bukti', compact('pemesanan'));
 })->name('upload.bukti');
 
