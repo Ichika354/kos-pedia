@@ -69,6 +69,9 @@ Route::get('/datakos', function () {
 
 Route::put('/kos/{id}/status', [DatakosController::class, 'updateStatus'])->name('kos.updateStatus');
 
+Route::get('/login-admin', function() {
+    return view('admin.login-admin');
+})->name('login-admin');
 
 Route::get('/datauser', [AdminController::class, 'index'])->name('datauser');
 
