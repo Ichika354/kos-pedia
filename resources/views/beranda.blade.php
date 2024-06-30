@@ -15,7 +15,7 @@
     <div class="h-24"></div>
 
     <div class="mx-auto mt-8 p-6">
-        <h1 class="text-3xl font-bold mb-4">Selamat datang di <span class="text-blue-600">Kos Pedia</span></h1>
+        <h1 class="text-3xl font-bold mb-4">Selamat datang di <span class="text-blue-600">KosPedia</span></h1>
         <p class="text-lg mb-2">Cari kos idaman kini tak perlu susah, Klik saja di sini, semuanya jadi mudah.
             Temukan tempat nyaman, buat hati senang, bersama kami, hidup jadi riang.</p>
         <p id="kos" class="text-lg mb-2">Selamat mencari kos yang pas, di sini semua jadi lebih bebas!</p>
