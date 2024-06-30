@@ -128,11 +128,6 @@ Route::get('/data-pemilik', function () {
 
 Route::get('/datauser/{user}', [RegisteredUserController::class, 'show'])->name('datauser.show');
 
-// datauser
-Route::resource('user', UserController::class);
-Route::get('/data-user', function () {
-    return view('user.data-user');
-});
 
 
 //PembayaranController
@@ -170,7 +165,7 @@ Route::get('/pemesanans', [PemesananController::class, 'index'])->name('pemesana
 
 // Route
 Route::get('/pemesanan/upload-bukti/{id}', function ($id) {
-    $pemesanan = Pemesanan::with('kos')->findOrFail($id);
+    $pemesanan = Pemesanan::with('datakos')->findOrFail($id);
     return view('pemesanan.upload-bukti', compact('pemesanan'));
 })->name('upload.bukti');
 
