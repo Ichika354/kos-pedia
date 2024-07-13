@@ -11,6 +11,7 @@
                             <th class="text-truncate">No HP</th>
                             <th class="text-truncate">Email</th>
                             <th class="text-truncate">Tanggal Dibuat</th>
+                            <th class="text-truncate">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,6 +24,14 @@
                                 <td class="text-truncate">{{ $pemilikKos->no_hp }}</td>
                                 <td class="text-truncate">{{ $pemilikKos->email }}</td>
                                 <td class="text-truncate">{{ $pemilikKos->created_at }}</td>
+                                <td class="text-truncate">
+                                    <form id="deleteAccountForm" action="{{ route('account.delete', $pemilikKos->id) }}" method="POST"
+                                        class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" id="deleteAccountButton" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -30,4 +39,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('deleteAccountButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Anda Yakin?',
+                text: "Menghapus akun anda dapat menghapus semua data yang berkaitan dengan akun anda!!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteAccountForm').submit();
+                }
+            });
+        });
+    </script>
 @endsection

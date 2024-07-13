@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default"
+    data-assets-path="{{ asset('dashboard') }} /" data-template="vertical-menu-template-free">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Document</title>
+
+    <title>Doc</title>
+
     <meta name="description" content="" />
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon/favicon.ico') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,21 +45,31 @@
 </head>
 
 <body>
+    <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
+            <!-- Menu -->
             @include('components.sidebar-admin')
-            <div class="layout-pages w-100">
-                @include('components.navbar-admin')
+            <!-- / Menu -->
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Content wrapper -->
                 <div class="content-wrapper">
+                    <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row gy-4">
                             @yield('content')
                         </div>
                     </div>
+                    <!-- / Content -->
                 </div>
+                <!-- Content wrapper -->
             </div>
+            <!-- / Layout page -->
         </div>
     </div>
+    <!-- / Layout wrapper -->
+
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -79,6 +93,28 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: true
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: true
+            });
+        </script>
+    @endif
+    
 </body>
 
 </html>

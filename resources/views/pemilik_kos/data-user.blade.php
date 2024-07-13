@@ -1,10 +1,9 @@
-<!-- resources/views/pemilik/pesanan.blade.php -->
 @extends('layouts.pemilik')
 
 @section('content')
     <div class="container mx-auto py-8">
         <div class="bg-white shadow-md rounded-lg p-6">
-            <h1 class="text-2xl font-bold mb-4">Data Pembayaran</h1>
+            <h1 class="text-2xl font-bold mb-4">Data User</h1>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-200">
@@ -40,7 +39,7 @@
                     </tbody>
                 </table>
             </div>
-            
+
         </div>
     </div>
 @endsection

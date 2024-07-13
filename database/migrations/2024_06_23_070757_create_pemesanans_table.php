@@ -1,16 +1,10 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('pemesanans', function (Blueprint $table) {
@@ -28,17 +22,11 @@ return new class extends Migration
             $table->enum('aksi', ['Pending','Setuju', 'Tidak setuju']);
             $table->timestamps();
             // Foreign key constraint
-            $table->foreign('id_kos')->references('id')->on('datakos');
-            $table->foreign('pemilik_kos_id')->references('id')->on('pemilik_kos');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('id_kos')->references('id')->on('datakos')->onDelete('cascade');
+            $table->foreign('pemilik_kos_id')->references('id')->on('pemilik_kos')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('pemesanans');
